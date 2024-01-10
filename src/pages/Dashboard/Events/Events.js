@@ -5,6 +5,7 @@ import { useAuthContext } from '../../../hooks/useAuthContext'
 import ConfirmWindow from '../../../Components/ConfirmWindow/ConfirmWindow.styled'
 import { useFormik } from 'formik'
 import validationSchema from './eventForm/validationSchema'
+import Loader from '../../../Components/Loader/Loader.styled'
 
 const Events = ({className}) => {
     const [events, setEvents] = useState([])
@@ -12,15 +13,19 @@ const Events = ({className}) => {
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [eventToDelete, setEventToDelete] = useState(null)
     const [unabled, setUnabled] = useState(null)
+    const [isLoading, setIsLoading] = useState(false)
+    const [loadingEvents, setLoadingEvents] = useState(false)
 
     // load events from DB
     const fetchEvents = async () => {
+      setLoadingEvents(true)
       try {
         const response = await axios.get('https://mern-backend-9pmg.onrender.com/api/dashboard/events-list')
         setEvents(response.data)
       } catch (error) {
         console.log('Error fetching events', error)
       }
+      setLoadingEvents(false)
       
     }
     // initial fetch
@@ -43,7 +48,7 @@ const Events = ({className}) => {
     },
     validationSchema,
     onSubmit: async (values) => {
-      
+      setIsLoading(true)
       // FormData is a built-in JavaScript object that provides a way to easily construct a set of key/value pairs representing 
       // form fields and their values. It is commonly used to create and send multipart/form-data requests, which is the format 
       // used when uploading files through a form.
@@ -61,6 +66,7 @@ const Events = ({className}) => {
             'Content-Type': 'multipart/form-data'
           }
         })
+        setIsLoading(false)
         alert('Event created successfully!')
         fetchEvents()
         formik.resetForm()
@@ -70,8 +76,6 @@ const Events = ({className}) => {
       }
     }
   })
-
-  // deletion logic
 
   //deletion modal
   const handleDeleteClick = (classs) => {
@@ -96,15 +100,29 @@ const Events = ({className}) => {
         })
         setShowDeleteModal(false)
   }
+
   const handleModalClose = () => {
     setShowDeleteModal(false)
   }
+
+  const dateFormater = (date) => {
+    const dt = new Date(date)
+    const year = dt.getFullYear()
+    const month = dt.getMonth()
+    const day = dt.getDate()
+    const hours = dt.getHours()
+    const minutes = dt.getMinutes()
+    return `${year}/${month+1}/${day} ${hours}:${minutes.toLocaleString('en-US', {minimumIntegerDigits: 2})}`
+
+  }
+
     return (
       <section className={className}>
 
         <div className="left">
           <h2>Events</h2>
           <div className="events">
+            {loadingEvents ? <h2>Loading events...</h2> : null}
             {events && events.map((event, index) => {
               return (
                   <div key={event._id} className="item">
@@ -116,7 +134,7 @@ const Events = ({className}) => {
 
                       <div className="right">
                           <h3>{event.title}</h3>
-                          <p className="date">{event.day}</p>
+                          <p className="date">{dateFormater(event.date)}</p>
                           <p className="desc">{event.desc}</p>
                           
                       </div>
@@ -203,6 +221,7 @@ const Events = ({className}) => {
                     
                     
                     <button type="submit">Submit</button>
+                    <Loader loading={isLoading}/>
                 </form>
         </div>
 

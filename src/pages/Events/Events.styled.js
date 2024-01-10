@@ -8,6 +8,7 @@ flex-direction: column;
         width: 100vw;
         position: relative;
         z-index: -1;
+        margin-top: 80px;
         
     }
     .poster h1 {
@@ -20,6 +21,16 @@ flex-direction: column;
         text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
         margin: 0;
         transform: translateX(-50%);
+        @media (max-width: 918px) {
+            font-size: 72pt;
+            top: 40%;
+        }
+        @media (max-width: 696px) {
+            font-size: 58pt;
+        }
+        @media (max-width: 542px) {
+            font-size: 46pt;
+        }
     }
     .overlay {
         width: 100%;
@@ -52,7 +63,16 @@ flex-direction: column;
         gap: 15vw;
         margin-bottom: 20px;
         height: 100%;
-
+        @media (max-width: 843px) {
+            gap: 10vw;
+        }
+        @media (max-width: 781px) {
+            gap: 5vw;
+        }
+        @media (max-width: 626px) {
+            flex-direction: column;
+        }
+        
     }
     .event-content img {
         min-width: 289px;
@@ -61,6 +81,10 @@ flex-direction: column;
         object-fit: cover;
         margin: 40px auto;
         border-radius: 10px;
+        @media (max-width: 626px) {
+            min-width: 100%;
+            
+        }
     }
     .event-content h2 {
         margin: 15px 0;

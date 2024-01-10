@@ -11,6 +11,10 @@ const FooterStyled = styled(Footer)`
         margin: 0;
         text-align: right;
         font-size: 14pt;
+        @media (max-width: 640px) {
+            font-size: 12pt;
+        }
+
         
     }
     .login, .admin {
@@ -55,6 +59,11 @@ const FooterStyled = styled(Footer)`
         margin: 0 auto;
         padding: 10px 0;
         font-size: 16pt;
+        @media (max-width: 640px) {
+            width:90vw;
+        }
+
+        
    
     }
 `

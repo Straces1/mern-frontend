@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 
 import igIcon from './instagram-outlined.svg'
 import fbIcon from './facebook-filled.svg'
+import menuIcon from './hamburger-menu.svg'
 import WhiteDivider from '../../Components/WhiteWave/WhiteWave.styled'
 
 const NavBar = ({className}) => {
@@ -45,7 +46,7 @@ const NavBar = ({className}) => {
 
       {
         window.innerWidth < 688 &&
-        <button onClick={() => setMenuOpen(!menuOpen)} className="hamburger">click me</button>
+        <button onClick={() => setMenuOpen(!menuOpen)} className="hamburger"><img src={menuIcon} alt='menu-icon' width={23}/></button>
       }
 
       

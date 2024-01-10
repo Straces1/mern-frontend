@@ -8,10 +8,13 @@ import ContactForm from '../../Components/ContactForm/ContactForm.styled'
 
 const Events = ({className}) => {
   const [events, setEvents] = useState([])
+  const [loadingEvents, setLoadingEvents] = useState(false)
   useEffect(() => {
     const fetchEvents = async () => {
+      setLoadingEvents(true)
       const response = await axios.get('https://mern-backend-9pmg.onrender.com/api/events')
       setEvents(response.data)
+      setLoadingEvents(false)
     }
     fetchEvents()
   }, [])
@@ -23,7 +26,7 @@ const Events = ({className}) => {
     const day = dt.getDate()
     const hours = dt.getHours()
     const minutes = dt.getMinutes()
-    return `${year}/${month+1}/${day} ${hours}:${minutes}`
+    return `${year}/${month+1}/${day} ${hours}:${minutes.toLocaleString('en-US', {minimumIntegerDigits: 2})}`
 
   }
 
@@ -36,6 +39,7 @@ const Events = ({className}) => {
       </div>
 
       <div className="events">
+        {loadingEvents ? <FlexContainer><h2>Loading Events...</h2></FlexContainer> : null}
         {events && events.map((event, index) => {
           return (
             <div key={event._id} className='event'>

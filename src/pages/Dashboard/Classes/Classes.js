@@ -18,17 +18,20 @@ const Classes = ({className}) => {
   const [loading, setLoading] = useState(false)
   const {user} = useAuthContext()
   const [unabled, setUnabled] = useState(null)
+  const [loadingClasses, setLoadingClasses] = useState(false)
 
 
   // list of classes
     const [classes, setClasses] = useState([])
     const fetchClasses = async () => {
+        setLoadingClasses(true)
         try {
             const response = await axios.get('https://mern-backend-9pmg.onrender.com/api/dashboard/classes-list')
             setClasses(response.data)
         } catch (error) {
             console.log('Error fetching classes', error)
         }
+        setLoadingClasses(false)
     }
     // initial fetch when the component is mounted
     useEffect(() => {
@@ -128,6 +131,7 @@ const Classes = ({className}) => {
         <div className="left">
             <h2>Classes</h2>
             <div className="classes">
+                {loadingClasses ? <h2>Loading classes...</h2> : null}
                 {classes && classes.map((classs, index) => {
                     
                     return (

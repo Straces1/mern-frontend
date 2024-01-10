@@ -18,6 +18,7 @@ const ContactForm = ({className}) => {
 
   // background graphic
    let bgPos
+   let graphic
    const w = window.innerWidth
   if (w >= 1020){bgPos = '327px -30px'}
   if (w <= 1019 && w >= 966){bgPos = '277px -30px'}
@@ -27,6 +28,7 @@ const ContactForm = ({className}) => {
   if (w <= 731 && w >= 688){bgPos = '180% 50%'}
   if (w <= 687 && w >= 641){bgPos = '250% 50%'}
   if (w <= 640 && w >= 0){bgPos = '50% 50%'}
+  if (w <= 640 && w >= 0){graphic = 'none'} else {graphic = `url(${triangles})`}
 
 
 
@@ -50,7 +52,7 @@ const ContactForm = ({className}) => {
           .max(60, 'Subject is too long, max length is 60 characters')
           .required('Required'),
       message: Yup.string()
-          .min(20, 'Please provide me more details about your booking or enquiry')
+          .min(20, 'Please provide more details about your booking or enquiry')
           .max(400, 'Your message is too long, we can handle up to 400 characters')
           .required('Required')
     }),
@@ -80,7 +82,7 @@ const ContactForm = ({className}) => {
 
   return (
     <div id='contact-form' className={className} style={{
-            background: `url(${triangles})`,
+            background: graphic,
             backgroundRepeat: 'no-repeat',
             backgroundPosition: bgPos
         }}>

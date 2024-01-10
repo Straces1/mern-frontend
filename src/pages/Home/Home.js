@@ -15,6 +15,7 @@ import bannerMed from './banner_med.webp'
 import bannerSm from './banner_sm.webp'
 import logo from '../../assets/logg.svg'
 import avatar from '../../assets/avatar.png'
+import arrowIcon from './arrow-icon.svg'
 
 //packages
 import axios from 'axios'
@@ -22,10 +23,13 @@ import axios from 'axios'
 
 const Home = ({className}) => {
   const [events, setEvents] = useState([])
+  const [loadingEvents, setLoadingEvents] = useState(false)
   useEffect(() => {
     const fetchEvents = async () => {
+      setLoadingEvents(true)
       const response = await axios.get('https://mern-backend-9pmg.onrender.com/api/upcoming-events')
       setEvents(response.data)
+      setLoadingEvents(false)
     }
     fetchEvents()
   }, [])
@@ -60,15 +64,16 @@ const Home = ({className}) => {
       <FlexContainer>
         <div className="upcoming">
         <h2>Upcoming Events</h2>
+        {loadingEvents ? <h3>Loading Events...</h3> : null}
           {events && events.map(event => {
-             
-          
-            
-
             return (
               <div key={event._id} className='event'>
                 <div className="left-column">
                   <img src={`https://mern-backend-9pmg.onrender.com/${event.picture}`} alt="" />
+                  {
+                    window.innerWidth <= 744 &&
+                    <div className="overlay"></div>
+                  }
                   <div className='circle' id='hover'>
                     
                     <div className="date">
@@ -79,6 +84,10 @@ const Home = ({className}) => {
                 <div className="right-column">
                   <h2>{event.title}</h2>
                   <p>{event.snippet}</p>
+                  {
+                    window.innerWidth <= 744 &&
+                    <div className="arrow-icon"><img src={arrowIcon} alt='arrow icon'/></div>
+                  }
                 </div>
               </div>
             )
@@ -100,9 +109,15 @@ const Home = ({className}) => {
         
         <FlexContainer>
           <div className="about-brief">
-            <img src={avatar} alt="" />
+            <div className="avatar">
+              <img src={avatar} alt="" />
+              {
+                window.innerWidth <= 589 &&
+                <h2 className='mobile-only'>Lisa Meeham</h2>
+              }
+            </div>
             <div>
-              <h2>Lisa Meeham</h2>
+              <h2 className='desktop-only'>Lisa Meeham</h2>
               <p>Start Small and Build Up Incrementally— Don’t bite off more than you can chew. While it may be tempting to jump into the Full Primary Series, as a newbie to Ashtanga Yoga, I’d recommend that.</p>
             </div>
           </div>

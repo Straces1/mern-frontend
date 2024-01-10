@@ -15,7 +15,7 @@ const NavBarStyled = styled(NavBar)`
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 10;
+    z-index: 200;
     a {
         text-decoration: none;
         color: white;
@@ -50,27 +50,33 @@ const NavBarStyled = styled(NavBar)`
         position: absolute;
         top:0;
         left:0;
-        z-index: 11;
+        z-index: 9;
 
         width: 100vw;
         height: 100vh;
 
-        background: rgba(56,68,93,0.7);
+        background: rgba(56,68,93,0.2);
     }
     .mobile-menu nav {
         position: absolute;
-        top:15vh;
-        right:10vw;
-        width: 30vw;
+        top:17vh;
+        right:0;
+        width: 70vw;
+        z-index: -20;
 
         display: flex;
         flex-direction: column;
         padding: 20px 0;
 
         background: rgba(56,68,93,0.9);
+        
     }
     .mobile-menu nav a, .mobile-menu nav span {
-        margin: 0 auto;
+        margin-left: 10vw;
+    }
+    .hamburger {
+        background: none;
+        border: none;
     }
 
 

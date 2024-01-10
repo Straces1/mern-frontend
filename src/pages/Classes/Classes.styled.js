@@ -19,6 +19,16 @@ const ClassesStyled = styled(Classes)`
         text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
         margin: 0;
         transform: translateX(-50%);
+        @media (max-width: 918px) {
+            font-size: 72pt;
+            top: 40%;
+        }
+        @media (max-width: 696px) {
+            font-size: 58pt;
+        }
+        @media (max-width: 542px) {
+            font-size: 46pt;
+        }
     }
     .overlay {
         width: 100%;

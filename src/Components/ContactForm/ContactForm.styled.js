@@ -136,6 +136,7 @@ const FormStyled = styled(ContactForm)`
             p {transform: translateY(-180px);}
             form {transform: translateY(-150px);}
         }
+        
 
 `
 

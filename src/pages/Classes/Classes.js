@@ -8,10 +8,13 @@ import ContactForm from '../../Components/ContactForm/ContactForm.styled'
 
 const Classes = ({className}) => {
   const [classes, setClasses] = useState([])
+  const [loadingClasses, setLoadingClasses] = useState(false)
   useEffect(() => {
     const fetchClasses = async () => {
+      setLoadingClasses(true)
       const response = await axios.get('https://mern-backend-9pmg.onrender.com/api/classes')
       setClasses(response.data)
+      setLoadingClasses(false)
     }
     fetchClasses()
   }, [])
@@ -25,6 +28,7 @@ const Classes = ({className}) => {
       </div>
 
       <div className="classes">
+      {loadingClasses ? <FlexContainer><h2>Loading classes...</h2></FlexContainer> : null}
         {classes && classes.map((classs, index) => {
           return (
             <div key={classs._id} className='classs'>

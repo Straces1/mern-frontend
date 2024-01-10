@@ -1,6 +1,7 @@
 import React from 'react'
 import aboutImage from './about-image.png'
 import logo from '../../assets/logg.svg'
+import logoWhite from '../../assets/logg-white.svg'
 import FlexContainer from '../../Components/FlexibleContainer'
 import WhiteDivider from '../../Components/WhiteWave/WhiteWave.styled'
 import coldWater from './cold-water.jpg'
@@ -41,9 +42,12 @@ const About = ({className}) => {
             <h2>Lisa Meeham</h2>
             <p>There are four Vedas; Rigveda, Samaveda, Yajurveda, Atharvaveda. They are said to be sruti, heard – of divine revelation (as opposed to smriti, remembered). They contain the foundational understanding of the sanatana dharma.</p>
           </div>
-
-          
-            <img src={logo} style={{width: '360px'}} className='logo' alt="logo" />
+            {
+                window.innerWidth > 509 ?
+                <img src={logo} className='logo' alt="logo" /> :
+                <img src={logoWhite} className='logo' alt="logo-white" style={{width: '90vw', height: '80vw'}}/>
+                
+              }
         
         </div>
       </FlexContainer>
@@ -58,7 +62,7 @@ const About = ({className}) => {
           </div>
         </div>
         
-        <div style={{background: `url(${joga})`, backgroundSize: 'cover'}} className="joga">
+        <div style={{background: `url(${joga})`, backgroundSize: 'cover', backgroundPosition: '50% 50%'}} className="joga">
           <div className="mask two">
             <h1>Yoga</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mini</p>
