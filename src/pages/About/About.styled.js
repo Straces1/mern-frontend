@@ -79,7 +79,7 @@ const AboutStyled = styled(About)`
         width: 25vw;
         margin: 0;
         margin-top: 40px;
-        border: 1px solid black;
+        
         @media (max-width: 1285px) {
             margin-top: 20px;
             width: 45vw;
